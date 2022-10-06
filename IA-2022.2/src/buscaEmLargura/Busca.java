@@ -22,9 +22,9 @@ public class Busca {
 	}
 	
 	public static String solucao(No no) {
-		if(no.getPai() != null) {
+		if(no.getPai() != null)
 			return solucao(no.getPai())  + " -> " + no.getEstado().getNome();
-		}
+
 		return no.getEstado().getNome();
 	}
 	

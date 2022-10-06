@@ -1,8 +1,8 @@
-package buscaPorCusto;
+package buscaDeCustoUniforme;
 
 import mapa.Estado;
 
-public class No implements Comparable{
+public class No implements Comparable<No>{
 	
 	private Estado estado;
 	private No pai;
@@ -40,6 +40,10 @@ public class No implements Comparable{
 
 	public int getCusto() {
 		return custo;
+	}
+	
+	public void setCusto(int custo) {
+		this.custo = custo;
 	}
 
 	public void addCusto(int custo) {

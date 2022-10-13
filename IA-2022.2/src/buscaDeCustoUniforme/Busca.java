@@ -29,25 +29,25 @@ public class Busca {
 		return no.getEstado().getNome();
 	}
 	
-	public static String BUSCA_EM_LARGURA(Mapa m, String origem, String destino) {
+	public static String BUSCA_DE_CUSTO_UNIFORME(Mapa mapa, String origem, String destino) {
 		PriorityQueue<No> borda = new PriorityQueue<>();
 		ArrayList<No> explorados = new ArrayList<>();
-		Estado est_inicial = null;
-		for(Estado estado: m.getEstados())
+		Estado estado_inicial = null;
+		for(Estado estado: mapa.getEstados())
 			if(estado.getNome().equalsIgnoreCase(origem)) {
-				est_inicial = estado;
+				estado_inicial = estado;
 				break;
 			}
-		borda.add(new No(est_inicial, null, 0));
+		borda.add(new No(estado_inicial));
 		
 		while(true) {
-			if(borda.size() == 0)																	//Se a borda está vazia	
+			if(borda.size() == 0 || estado_inicial == null)											//Se a borda está vazia	
 				return "Percurso não encontrado!";													//Falha
 			
 			No no = borda.poll(); 																	//Remover elemento da borda
 			
 			if(no.getEstado().getNome().equalsIgnoreCase(destino))									//Se é o nó destino
-				return solucao(no) + " (Custo Total: " + no.getCusto() + "km)";						//Solução
+				return String.format("%s (Custo Total: %dkm)", solucao(no), no.getCusto());			//Solução
 			
 			explorados.add(no); 																	//Adicionar ao explorados
 			
@@ -61,6 +61,7 @@ public class Busca {
 								&& n.getCusto() > filho.getCusto()) {								//Se o filho está na borda com maior custo
 							n.setPai(filho.getPai());
 							n.setCusto(filho.getCusto());
+							break;
 						}	
 			}
 		}
@@ -72,7 +73,7 @@ public class Busca {
 		String origem = scanner.nextLine();
 		System.out.println("Digite o nome do estado de destino");
 		String destino = scanner.nextLine();
-		System.out.println(BUSCA_EM_LARGURA(new Mapa(), origem, destino));
+		System.out.println(BUSCA_DE_CUSTO_UNIFORME(new Mapa(), origem, destino));
 		scanner.close();
 	}
 

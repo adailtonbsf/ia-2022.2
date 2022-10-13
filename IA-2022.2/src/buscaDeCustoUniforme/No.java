@@ -5,13 +5,17 @@ import mapa.Estado;
 public class No implements Comparable<No>{
 	
 	private Estado estado;
-	private No pai;
+	private No pai = null;
 	private int custo = 0;
 	
 	public No(Estado estado, No pai, int custo) {
 		this.estado = estado;
 		this.pai = pai;
 		this.custo = custo;
+	}
+	
+	public No(Estado estado) {
+		this.estado = estado;
 	}
 	
 	public int compareTo(No no) {
@@ -24,10 +28,6 @@ public class No implements Comparable<No>{
 
 	public Estado getEstado() {
 		return estado;
-	}
-
-	public void setEstado(Estado estado) {
-		this.estado = estado;
 	}
 
 	public No getPai() {

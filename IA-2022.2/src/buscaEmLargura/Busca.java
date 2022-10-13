@@ -28,29 +28,29 @@ public class Busca {
 		return no.getEstado().getNome();
 	}
 	
-	public static String BUSCA_EM_LARGURA(Mapa m, String origem, String destino) {
+	public static String BUSCA_EM_LARGURA(Mapa mapa, String origem, String destino) {
 		Stack<No> borda = new Stack<>();
 		ArrayList<No> explorados = new ArrayList<>();
-		Estado est_inicial = null;
-		for(Estado estado: m.getEstados())
+		Estado estado_inicial = null;
+		for(Estado estado: mapa.getEstados())
 			if(estado.getNome().equalsIgnoreCase(origem)) {
-				est_inicial = estado;
+				estado_inicial = estado;
 				break;
 			}
-		borda.push(new No(est_inicial, null, 0));
+		borda.push(new No(estado_inicial));
 		
 		while(true) {
-			if(borda.size() == 0)																		//Se a borda está vazia	
-				return "Percurso não encontrado!";														//Falha
+			if(borda.size() == 0 || estado_inicial == null)													//Se a borda está vazia	
+				return "Percurso não encontrado!";															//Falha
 			
-			No no = borda.pop(); 																		//Remover elemento da borda
-			explorados.add(no); 																		//Adicionar ao explorados
-			for(Transicao adj: no.getEstado().getAdjacentes()) { 										//Para cada ação aplicável
-				No filho = new No(adj.getEstadoDestino(), no, adj.getCusto() + no.getCusto()); 			//Criar filho
-				if(!jaFoiVisitado(borda, explorados, filho)) 											//Se o filho não está em explorados ou borda
-					if(filho.getEstado().getNome().equalsIgnoreCase(destino)) 							//Se o filho é o destino
-						return solucao(filho) + " (Custo Total: " + filho.getCusto() + "km)";			//Solução
-					else borda.push(filho);																//Adicionar filho na borda
+			No no = borda.pop(); 																			//Remover elemento da borda
+			explorados.add(no); 																			//Adicionar ao explorados
+			for(Transicao adj: no.getEstado().getAdjacentes()) { 											//Para cada ação aplicável
+				No filho = new No(adj.getEstadoDestino(), no, adj.getCusto() + no.getCusto()); 				//Criar filho
+				if(!jaFoiVisitado(borda, explorados, filho)) 												//Se o filho não está em explorados ou borda
+					if(filho.getEstado().getNome().equalsIgnoreCase(destino)) 								//Se o filho é o destino
+						return String.format("%s (Custo Total: %dkm)", solucao(filho), filho.getCusto());	//Solução
+					else borda.push(filho);																	//Adicionar filho na borda
 			}
 		}
 	}

@@ -12,11 +12,11 @@ public class Busca {
 	
 	public static boolean jaFoiVisitado(PriorityQueue<No> borda, ArrayList<No> explorados, No filho) {
 		boolean visitado = false;
-		for(No n: borda) 																			//Se filho est· na borda
+		for(No n: borda) 																			//Se filho est√° na borda
 			if(n.getEstado().getNome().equalsIgnoreCase(filho.getEstado().getNome()))
 				visitado = true;
 		if(!visitado)
-			for(No n: explorados) 																	//Se filho est· em explorados
+			for(No n: explorados) 																	//Se filho est√° em explorados
 				if(n.getEstado().getNome().equalsIgnoreCase(filho.getEstado().getNome()))
 					visitado = true;
 		return visitado;
@@ -41,24 +41,24 @@ public class Busca {
 		borda.add(new No(estado_inicial));
 		
 		while(true) {
-			if(borda.size() == 0 || estado_inicial == null)											//Se a borda est· vazia	
-				return "Percurso n„o encontrado!";													//Falha
+			if(borda.size() == 0 || estado_inicial == null)											//Se a borda est√° vazia	
+				return "Percurso n√£o encontrado!";													//Falha
 			
 			No no = borda.poll(); 																	//Remover elemento da borda
 			
-			if(no.getEstado().getNome().equalsIgnoreCase(destino))									//Se È o nÛ destino
-				return String.format("%s (Custo Total: %dkm)", solucao(no), no.getCusto());			//SoluÁ„o
+			if(no.getEstado().getNome().equalsIgnoreCase(destino))									//Se √© o n√≥ destino
+				return String.format("%s (Custo Total: %dkm)", solucao(no), no.getCusto());			//Solu√ß√£o
 			
 			explorados.add(no); 																	//Adicionar ao explorados
 			
-			for(Transicao adj: no.getEstado().getAdjacentes()) { 									//Para cada aÁ„o aplic·vel
+			for(Transicao adj: no.getEstado().getAdjacentes()) { 									//Para cada a√ß√£o aplic√°vel
 				No filho = new No(adj.getEstadoDestino(), no, adj.getCusto() + no.getCusto()); 		//Criar filho
-				if(!jaFoiVisitado(borda, explorados, filho)) 										//Se o filho n„o est· em explorados ou borda			
+				if(!jaFoiVisitado(borda, explorados, filho)) 										//Se o filho n√£o est√° em explorados ou borda			
 					borda.add(filho);																//Adicionar filho na borda
 				else 
 					for(No n: borda) 
 						if(n.getEstado().getNome().equals(filho.getEstado().getNome()) 
-								&& n.getCusto() > filho.getCusto()) {								//Se o filho est· na borda com maior custo
+								&& n.getCusto() > filho.getCusto()) {								//Se o filho est√° na borda com maior custo
 							n.setPai(filho.getPai());
 							n.setCusto(filho.getCusto());
 							break;

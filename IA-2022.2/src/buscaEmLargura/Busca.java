@@ -1,15 +1,15 @@
 package buscaEmLargura;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
-import java.util.Stack;
 import mapa.Estado;
 import mapa.Mapa;
 import mapa.Transicao;
 
 public class Busca {
 	
-	public static boolean jaFoiVisitado(Stack<No> borda, ArrayList<No> explorados, No filho) {
+	public static boolean jaFoiVisitado(LinkedList<No> borda, ArrayList<No> explorados, No filho) {
 		boolean visitado = false;
 		for(No n: borda) 														//Se filho está na borda
 			if(n.getEstado().getNome().equalsIgnoreCase(filho.getEstado().getNome()))
@@ -29,7 +29,7 @@ public class Busca {
 	}
 	
 	public static String BUSCA_EM_LARGURA(Mapa mapa, String origem, String destino) {
-		Stack<No> borda = new Stack<>();
+		LinkedList<No> borda = new LinkedList<>();
 		ArrayList<No> explorados = new ArrayList<>();
 		Estado estado_inicial = null;
 		for(Estado estado: mapa.getEstados())
@@ -43,7 +43,7 @@ public class Busca {
 			if(borda.size() == 0 || estado_inicial == null)													//Se a borda está vazia	
 				return "Percurso não encontrado!";															//Falha
 			
-			No no = borda.pop(); 																			//Remover elemento da borda
+			No no = borda.removeFirst(); 																	//Remover elemento da borda
 			explorados.add(no); 																			//Adicionar ao explorados
 			for(Transicao adj: no.getEstado().getAdjacentes()) { 											//Para cada ação aplicável
 				No filho = new No(adj.getEstadoDestino(), no, adj.getCusto() + no.getCusto()); 				//Criar filho
@@ -57,6 +57,7 @@ public class Busca {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
+		System.out.println("BUSCA EM LARGURA");
 		System.out.println("Digite o nome do estado de origem:");
 		String origem = scanner.nextLine();
 		System.out.println("Digite o nome do estado de destino");

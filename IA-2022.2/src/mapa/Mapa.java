@@ -42,7 +42,7 @@ public class Mapa {
 			new Transicao(lugoj, 111)));
 		lugoj.setAdjacencias(Arrays.asList(
 			new Transicao(timisoara, 111), 
-			new Transicao(mehadia, 75)));
+			new Transicao(mehadia, 70)));
 		mehadia.setAdjacencias(Arrays.asList(
 			new Transicao(lugoj, 70), 
 			new Transicao(dobreta, 75)));
@@ -56,7 +56,7 @@ public class Mapa {
 		sibiu.setAdjacencias(Arrays.asList(
 			new Transicao(arad, 140), 
 			new Transicao(oradea, 151), 
-			new Transicao(fagaras, 211), 
+			new Transicao(fagaras, 99), 
 			new Transicao(rimnicu, 80)));
 		rimnicu.setAdjacencias(Arrays.asList(
 			new Transicao(sibiu, 80), 
@@ -79,7 +79,7 @@ public class Mapa {
 		urziceni.setAdjacencias(Arrays.asList(
 			new Transicao(bucharest, 85), 
 			new Transicao(vaslui, 142), 
-			new Transicao(hirsova, 86)));
+			new Transicao(hirsova, 98)));
 		hirsova.setAdjacencias(Arrays.asList(
 			new Transicao(urziceni, 98), 
 			new Transicao(eforie, 86)));

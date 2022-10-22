@@ -12,15 +12,19 @@ import mapa.Transicao;
 public class Busca {
 	
 	public static boolean jaFoiVisitado(PriorityQueue<No> borda, ArrayList<No> explorados, No filho) {
-		boolean visitado = false;
-		for(No n: borda) 																			//Se filho está na borda
-			if(n.getEstado().getNome().equalsIgnoreCase(filho.getEstado().getNome()))
-				visitado = true;
-		if(!visitado)
-			for(No n: explorados) 																	//Se filho está em explorados
-				if(n.getEstado().getNome().equalsIgnoreCase(filho.getEstado().getNome()))
-					visitado = true;
-		return visitado;
+	    boolean visitado = false;
+        for(No n: borda)                                                                            //Se filho está na borda
+            if(n.getEstado().getNome().equalsIgnoreCase(filho.getEstado().getNome())) {
+                visitado = true;
+                break;
+            }
+        if(!visitado)
+            for(No n: explorados)                                                                   //Se filho está em explorados
+                if(n.getEstado().getNome().equalsIgnoreCase(filho.getEstado().getNome())) {
+                    visitado = true;
+                    break;
+                }
+        return visitado;
 	}
 	
 	public static String solucao(No no) {

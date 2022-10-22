@@ -2,23 +2,28 @@ package buscaEmLargura;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import buscaAEstrela.No;
 import mapa.Estado;
 import mapa.Mapa;
 import mapa.Transicao;
 
 public class Busca {
 	
-	public static boolean jaFoiVisitado(LinkedList<No> borda, ArrayList<No> explorados, No filho) {
-		boolean visitado = false;
-		for(No n: borda) 														//Se filho está na borda
-			if(n.getEstado().getNome().equalsIgnoreCase(filho.getEstado().getNome()))
-				visitado = true;
-		if(!visitado)
-			for(No n: explorados) 												//Se filho está em explorados
-				if(n.getEstado().getNome().equalsIgnoreCase(filho.getEstado().getNome()))
-					visitado = true;
-		return visitado;
-	}
+    public static boolean jaFoiVisitado(LinkedList<No> borda, ArrayList<No> explorados, No filho) {
+        boolean visitado = false;
+        for(No n: borda)                                                                            //Se filho está na borda
+            if(n.getEstado().getNome().equalsIgnoreCase(filho.getEstado().getNome())) {
+                visitado = true;
+                break;
+            }
+        if(!visitado)
+            for(No n: explorados)                                                                   //Se filho está em explorados
+                if(n.getEstado().getNome().equalsIgnoreCase(filho.getEstado().getNome())) {
+                    visitado = true;
+                    break;
+                }
+        return visitado;
+    }
 	
 	public static String solucao(No no) {
 		if(no.getPai() != null)

@@ -30,7 +30,7 @@ public class Busca {
 	}
 	
 	public static String BUSCA_DE_CUSTO_UNIFORME(Mapa mapa, String origem, String destino) {		
-		PriorityQueue<No> borda = new PriorityQueue<>();
+		PriorityQueue<No> borda = new PriorityQueue<>();                                            //Prioridade com base no compareTo da classe No
 		Estado estado_inicial = mapa.getEstado(origem);
 		borda.add(new No(estado_inicial));
 		ArrayList<No> explorados = new ArrayList<>();

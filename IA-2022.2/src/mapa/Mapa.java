@@ -120,6 +120,13 @@ public class Mapa {
 		return estados;
 	}
 	
+	public Estado getEstado(String nome) {
+	    for(Estado estado: estados)
+            if(estado.getNome().equalsIgnoreCase(nome))
+                return estado;
+	    return null;
+	}
+	
 	@Override
 	public String toString() {
 		String mapa = "[";

@@ -30,14 +30,8 @@ public class Busca {
 	
 	
 	public static String BUSCA_EM_LARGURA(Mapa mapa, String origem, String destino) {
-		Estado estado_inicial = null;
-		for(Estado estado: mapa.getEstados())
-			if(estado.getNome().equalsIgnoreCase(origem)) {
-				estado_inicial = estado;
-				break;
-			}
-		
 		LinkedList<No> borda = new LinkedList<>();
+		Estado estado_inicial = mapa.getEstado(origem);
 		borda.add(new No(estado_inicial));
 		ArrayList<No> explorados = new ArrayList<>();
 		

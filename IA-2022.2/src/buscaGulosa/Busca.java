@@ -48,15 +48,9 @@ public class Busca {
                 return 0;
             }
         }
-	    
-		Estado estado_inicial = null;
-		for(Estado estado: mapa.getEstados())
-			if(estado.getNome().equalsIgnoreCase(origem)) {
-				estado_inicial = estado;
-				break;
-			}
-		
-		PriorityQueue<No> borda = new PriorityQueue<>(new NoComparator(valoresHeuristicos));
+
+	    PriorityQueue<No> borda = new PriorityQueue<>(new NoComparator(valoresHeuristicos));
+	    Estado estado_inicial = mapa.getEstado(origem);
 		borda.add(new No(estado_inicial));
 		ArrayList<No> explorados = new ArrayList<>();
 		

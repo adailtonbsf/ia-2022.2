@@ -29,15 +29,9 @@ public class Busca {
 		return no.getEstado().getNome();
 	}
 	
-	public static String BUSCA_DE_CUSTO_UNIFORME(Mapa mapa, String origem, String destino) {
-		Estado estado_inicial = null;
-		for(Estado estado: mapa.getEstados())
-			if(estado.getNome().equalsIgnoreCase(origem)) {
-				estado_inicial = estado;
-				break;
-			}
-		
+	public static String BUSCA_DE_CUSTO_UNIFORME(Mapa mapa, String origem, String destino) {		
 		PriorityQueue<No> borda = new PriorityQueue<>();
+		Estado estado_inicial = mapa.getEstado(origem);
 		borda.add(new No(estado_inicial));
 		ArrayList<No> explorados = new ArrayList<>();
 		

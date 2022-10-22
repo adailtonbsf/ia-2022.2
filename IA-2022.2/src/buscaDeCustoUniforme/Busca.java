@@ -2,8 +2,6 @@ package buscaDeCustoUniforme;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
-import java.util.Scanner;
-
 import mapa.Estado;
 import mapa.Mapa;
 import mapa.Transicao;
@@ -41,7 +39,7 @@ public class Busca {
 		borda.add(new No(estado_inicial));
 		
 		while(true) {
-			if(borda.size() == 0 || estado_inicial == null)											//Se a borda está vazia	
+			if(borda.size() == 0 || estado_inicial == null)											//Se a borda está vazia
 				return "Percurso não encontrado!";													//Falha
 			
 			No no = borda.poll(); 																	//Remover elemento da borda
@@ -55,7 +53,7 @@ public class Busca {
 				No filho = new No(adj.getEstadoDestino(), no, adj.getCusto() + no.getCusto()); 		//Criar filho
 				if(!jaFoiVisitado(borda, explorados, filho)) 										//Se o filho não está em explorados ou borda			
 					borda.add(filho);																//Adicionar filho na borda
-				else 
+				else
 					for(No n: borda) 
 						if(n.getEstado().getNome().equals(filho.getEstado().getNome()) 
 								&& n.getCusto() > filho.getCusto()) {								//Se o filho está na borda com maior custo
@@ -68,14 +66,8 @@ public class Busca {
 	}
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
 		System.out.println("BUSCA DE CUSTO UNIFORME");
-		System.out.println("Digite o nome do estado de origem:");
-		String origem = scanner.nextLine();
-		System.out.println("Digite o nome do estado de destino");
-		String destino = scanner.nextLine();
-		System.out.println(BUSCA_DE_CUSTO_UNIFORME(new Mapa(), origem, destino));
-		scanner.close();
+		System.out.println(BUSCA_DE_CUSTO_UNIFORME(new Mapa(), args[0], args[1]));
 	}
 
 }

@@ -13,7 +13,7 @@ public class Mapa {
 		Estado timisoara = new Estado("Timisoara", new ArrayList<Transicao>());
 		Estado lugoj = new Estado("Lugoj", new ArrayList<Transicao>());
 		Estado mehadia = new Estado("Mehadia", new ArrayList<Transicao>());
-		Estado dobreta = new Estado("Drobeta", new ArrayList<Transicao>());
+		Estado dobreta = new Estado("Dobreta", new ArrayList<Transicao>());
 		Estado sibiu = new Estado("Sibiu", new ArrayList<Transicao>());
 		Estado rimnicu = new Estado("Rimnicu Vilcea", new ArrayList<Transicao>());
 		Estado craiova = new Estado("Craiova", new ArrayList<Transicao>());

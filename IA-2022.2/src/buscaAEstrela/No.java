@@ -1,10 +1,8 @@
 package buscaAEstrela;
 
-import java.util.HashMap;
-
 import mapa.Estado;
 
-public class No implements Comparable<No>{
+public class No {
 	
 	private Estado estado;
 	private No pai = null;
@@ -19,17 +17,6 @@ public class No implements Comparable<No>{
 	public No(Estado estado) {
 		this.estado = estado;
 	}
-	
-	public int compareTo(No no) {
-        HashMap<String, Integer> valoresHeuristicos = Busca.valoresHeuristicos;
-        int no1 = valoresHeuristicos.get(this.estado.getNome().toLowerCase()) + this.custo;
-        int no2 = valoresHeuristicos.get(no.getEstado().getNome().toLowerCase()) + no.getCusto();
-        if(no1 < no2)
-            return -1;
-        if(no1 > no2)
-            return 1;
-        return 0;
-    }
 
 	public Estado getEstado() {
 		return estado;

@@ -1,10 +1,8 @@
 package buscaGulosa;
 
-import java.util.HashMap;
-
 import mapa.Estado;
 
-public class No implements Comparable<No>{
+public class No {
 	
 	private Estado estado;
 	private No pai = null;
@@ -18,15 +16,6 @@ public class No implements Comparable<No>{
 	
 	public No(Estado estado) {
 		this.estado = estado;
-	}
-	
-	public int compareTo(No no) {
-	    HashMap<String, Integer> valoresHeuristicos = Busca.valoresHeuristicos;
-		if(valoresHeuristicos.get(this.estado.getNome().toLowerCase()) < valoresHeuristicos.get(no.getEstado().getNome().toLowerCase()))
-			return -1;
-		if(valoresHeuristicos.get(this.estado.getNome().toLowerCase()) > valoresHeuristicos.get(no.getEstado().getNome().toLowerCase()))
-			return 1;
-		return 0;
 	}
 
 	public Estado getEstado() {

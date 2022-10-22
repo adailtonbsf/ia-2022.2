@@ -1,7 +1,6 @@
 package buscaEmProfundidade;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Stack;
 
 import mapa.Estado;
@@ -59,14 +58,8 @@ public class Busca {
 	}
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
 		System.out.println("BUSCA EM PROFUNDIDADE");
-		System.out.println("Digite o nome do estado de origem:");
-		String origem = scanner.nextLine();
-		System.out.println("Digite o nome do estado de destino");
-		String destino = scanner.nextLine();
-		System.out.println(BUSCA_EM_PROFUNDIDADE(new Mapa(), origem, destino));
-		scanner.close();
+		System.out.println(BUSCA_EM_PROFUNDIDADE(new Mapa(), args[0], args[1]));
 	}
 
 }

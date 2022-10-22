@@ -1,17 +1,15 @@
 package buscaGulosa;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.PriorityQueue;
-import java.util.Scanner;
-
+import buscaAEstrela.No;
 import mapa.Estado;
 import mapa.Mapa;
 import mapa.Transicao;
 
 public class Busca {
-    
-    public static HashMap<String, Integer> valoresHeuristicos = new HashMap<>();
 	
 	public static boolean jaFoiVisitado(PriorityQueue<No> borda, ArrayList<No> explorados, No filho) {
 		boolean visitado = false;
@@ -32,8 +30,25 @@ public class Busca {
 		return no.getEstado().getNome();
 	}
 	
-	public static String BUSCA_GULOSA(Mapa mapa, String origem, String destino) {
-		PriorityQueue<No> borda = new PriorityQueue<>();
+	public static String BUSCA_GULOSA(Mapa mapa, String origem, String destino, HashMap<String, Integer> valoresHeuristicos) {
+	    class NoComparator implements Comparator<No> {
+            HashMap<String, Integer> valoresHeuristicos;
+            public NoComparator(HashMap<String, Integer> valoresHeuristicos) {
+                this.valoresHeuristicos = valoresHeuristicos;
+            }
+            
+            @Override
+            public int compare(No no1, No no2) {
+                if(valoresHeuristicos.get(no1.getEstado().getNome().toLowerCase()) 
+                        < valoresHeuristicos.get(no2.getEstado().getNome().toLowerCase()))
+                    return -1;
+                if(valoresHeuristicos.get(no1.getEstado().getNome().toLowerCase()) 
+                        > valoresHeuristicos.get(no2.getEstado().getNome().toLowerCase()))
+                    return 1;
+                return 0;
+            }
+        }
+		PriorityQueue<No> borda = new PriorityQueue<>(new NoComparator(valoresHeuristicos));
 		ArrayList<No> explorados = new ArrayList<>();
 		Estado estado_inicial = null;
 		for(Estado estado: mapa.getEstados())
@@ -71,12 +86,9 @@ public class Busca {
 	}
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
 		System.out.println("BUSCA GULOSA DE MELHOR ESCOLHA");
-		System.out.println("Digite o nome do estado de origem:");
-		String origem = scanner.nextLine();
-		System.out.println("Digite o nome do estado de destino");
-		String destino = scanner.nextLine();
+		
+		HashMap<String, Integer> valoresHeuristicos = new HashMap<>();
 		valoresHeuristicos.put("arad", 366);
 		valoresHeuristicos.put("bucharest", 0);
 		valoresHeuristicos.put("craiova", 160);
@@ -97,8 +109,8 @@ public class Busca {
 		valoresHeuristicos.put("urziceni", 80);
 		valoresHeuristicos.put("vaslui", 199);
 		valoresHeuristicos.put("zerind", 374);
-		System.out.println(BUSCA_GULOSA(new Mapa(), origem, destino));
-		scanner.close();
+		
+		System.out.println(BUSCA_GULOSA(new Mapa(), args[0], args[1], valoresHeuristicos));
 	}
 
 }

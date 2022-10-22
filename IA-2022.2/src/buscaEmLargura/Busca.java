@@ -2,7 +2,6 @@ package buscaEmLargura;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Scanner;
 import mapa.Estado;
 import mapa.Mapa;
 import mapa.Transicao;
@@ -56,14 +55,8 @@ public class Busca {
 	}
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
 		System.out.println("BUSCA EM LARGURA");
-		System.out.println("Digite o nome do estado de origem:");
-		String origem = scanner.nextLine();
-		System.out.println("Digite o nome do estado de destino");
-		String destino = scanner.nextLine();
-		System.out.println(BUSCA_EM_LARGURA(new Mapa(), origem, destino));
-		scanner.close();
+		System.out.println(BUSCA_EM_LARGURA(new Mapa(), args[0], args[1]));
 	}
 
 }

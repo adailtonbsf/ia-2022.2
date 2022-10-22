@@ -27,16 +27,18 @@ public class Busca {
 		return no.getEstado().getNome();
 	}
 	
+	
 	public static String BUSCA_EM_LARGURA(Mapa mapa, String origem, String destino) {
-		LinkedList<No> borda = new LinkedList<>();
-		ArrayList<No> explorados = new ArrayList<>();
 		Estado estado_inicial = null;
 		for(Estado estado: mapa.getEstados())
 			if(estado.getNome().equalsIgnoreCase(origem)) {
 				estado_inicial = estado;
 				break;
 			}
-		borda.push(new No(estado_inicial));
+		
+		LinkedList<No> borda = new LinkedList<>();
+		borda.add(new No(estado_inicial));
+		ArrayList<No> explorados = new ArrayList<>();
 		
 		while(true) {
 			if(borda.size() == 0 || estado_inicial == null)													//Se a borda está vazia	
@@ -44,6 +46,7 @@ public class Busca {
 			
 			No no = borda.removeFirst(); 																	//Remover elemento da borda
 			explorados.add(no); 																			//Adicionar ao explorados
+			
 			for(Transicao adj: no.getEstado().getAdjacentes()) { 											//Para cada ação aplicável
 				No filho = new No(adj.getEstadoDestino(), no, adj.getCusto() + no.getCusto()); 				//Criar filho
 				if(!jaFoiVisitado(borda, explorados, filho)) 												//Se o filho não está em explorados ou borda

@@ -28,15 +28,16 @@ public class Busca {
 	}
 	
 	public static String BUSCA_DE_CUSTO_UNIFORME(Mapa mapa, String origem, String destino) {
-		PriorityQueue<No> borda = new PriorityQueue<>();
-		ArrayList<No> explorados = new ArrayList<>();
 		Estado estado_inicial = null;
 		for(Estado estado: mapa.getEstados())
 			if(estado.getNome().equalsIgnoreCase(origem)) {
 				estado_inicial = estado;
 				break;
 			}
+		
+		PriorityQueue<No> borda = new PriorityQueue<>();
 		borda.add(new No(estado_inicial));
+		ArrayList<No> explorados = new ArrayList<>();
 		
 		while(true) {
 			if(borda.size() == 0 || estado_inicial == null)											//Se a borda está vazia

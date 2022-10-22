@@ -29,30 +29,30 @@ public class Busca {
 	}
 	
 	public static String BUSCA_EM_PROFUNDIDADE(Mapa mapa, String origem, String destino) {
-		Stack<No> borda = new Stack<>();
-		ArrayList<No> explorados = new ArrayList<>();
 		Estado estado_inicial = null;
 		for(Estado estado: mapa.getEstados())
 			if(estado.getNome().equalsIgnoreCase(origem)) {
 				estado_inicial = estado;
 				break;
 			}
+		
+		Stack<No> borda = new Stack<>();
 		borda.add(new No(estado_inicial));
+		ArrayList<No> explorados = new ArrayList<>();
 		
 		while(true) {
-			if(borda.size() == 0 || estado_inicial == null)											 //Se a borda está vazia	
-				return "Percurso não encontrado!";													 //Falha
+			if(borda.size() == 0 || estado_inicial == null)                                                 //Se a borda está vazia	
+				return "Percurso não encontrado!";                                                          //Falha
 			
-			No no = borda.pop(); 																	 //Remover elemento da borda
-			explorados.add(no);                                                                      //Adicionar ao explorados
+			No no = borda.pop();                                                                            //Remover elemento da borda
+			explorados.add(no);                                                                             //Adicionar ao explorados
 			
-			for(Transicao adj: no.getEstado().getAdjacentes()) { 								     //Para cada ação aplicável
-				No filho = new No(adj.getEstadoDestino(), no, adj.getCusto() + no.getCusto()); 		 //Criar filho
-				if(!jaFoiVisitado(borda, explorados, filho)) { 										 //Se o filho não está em explorados ou borda
-				    if(no.getEstado().getNome().equalsIgnoreCase(destino))                           //Se é o nó destino
-		                return String.format("%s (Custo Total: %dkm)", solucao(no), no.getCusto());  //Solução
-				    borda.add(filho);                                                                //Adicionar filho na borda	
-				}
+			for(Transicao adj: no.getEstado().getAdjacentes()) {                                            //Para cada ação aplicável
+			    No filho = new No(adj.getEstadoDestino(), no, adj.getCusto() + no.getCusto());              //Criar filho
+				if(!jaFoiVisitado(borda, explorados, filho))                                                //Se o filho não está em explorados ou borda
+				    if(filho.getEstado().getNome().equalsIgnoreCase(destino))                               //Se o filho é o destino
+				        return String.format("%s (Custo Total: %dkm)", solucao(filho), filho.getCusto());   //Solução
+				    else borda.add(filho);                                                                  //Adicionar filho na borda	
 			}
 		}
 	}

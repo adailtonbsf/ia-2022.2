@@ -48,7 +48,6 @@ public class Busca {
 	        }
 	    }
 
-		
 		PriorityQueue<No> borda = new PriorityQueue<>(new NoComparator(valoresHeuristicos));
 		Estado estado_inicial = mapa.getEstado(origem);
 		borda.add(new No(estado_inicial));

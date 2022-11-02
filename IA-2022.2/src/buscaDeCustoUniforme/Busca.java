@@ -1,6 +1,7 @@
 package buscaDeCustoUniforme;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 import buscaAEstrela.No;
@@ -29,8 +30,19 @@ public class Busca {
 		return no.getEstado().getNome();
 	}
 	
-	public static String BUSCA_DE_CUSTO_UNIFORME(Mapa mapa, String origem, String destino) {		
-		PriorityQueue<No> borda = new PriorityQueue<>();                                            //Prioridade com base no compareTo da classe No
+	public static String BUSCA_DE_CUSTO_UNIFORME(Mapa mapa, String origem, String destino) {
+	    class NoComparator implements Comparator<No> {            
+            @Override
+            public int compare(No no1, No no2) {
+                if(no1.getCusto() < no2.getCusto())
+                        return -1;
+                if(no1.getCusto() > no2.getCusto())
+                        return 1;
+                return 0;
+            }
+        }
+	    
+		PriorityQueue<No> borda = new PriorityQueue<>(new NoComparator());
 		Estado estado_inicial = mapa.getEstado(origem);
 		borda.add(new No(estado_inicial));
 		ArrayList<No> explorados = new ArrayList<>();
